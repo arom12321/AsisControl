@@ -13,36 +13,42 @@ Backend del **Sistema de Información Web para la Gestión Integral de un Colegi
 - OpenAPI/Swagger.
 - Maven.
 
-La estructura respeta el estándar del equipo bajo el paquete raíz `com.asiscontrol`:
+El backend es un proyecto Maven multimódulo. Las capas principales son módulos independientes y el
+`pom.xml` de la raíz actúa como agregador:
 
 ```text
-controller/   Entrada HTTP y autorización
-service/      Reglas de negocio y transacciones
-repository/   Persistencia con Spring Data JPA
-entity/       Modelo persistente
-dto/          Contratos de entrada y salida
-security/     Autenticación y autorización
-config/       Configuración transversal
-exception/    Errores uniformes
-util/         Utilidades sin lógica de negocio
+backend/
+├── pom.xml                 Agregador Maven
+├── entity/                 Entidades JPA y enumeraciones
+├── dto/                    Contratos de entrada y salida
+├── repository/             Persistencia con Spring Data JPA
+├── service/                Reglas de negocio y transacciones
+│   └── src/main/java/com/asiscontrol/{service,security,exception,util}
+└── controller/             API REST y aplicación ejecutable
+    └── src/main/java/com/asiscontrol/{controller,config}
 ```
+
+Las dependencias siguen una sola dirección: `controller` consume `service`; `service` consume
+`repository`, `dto` y `entity`; `repository` consume `entity`; y `dto` consume los tipos del modelo
+que necesita para sus contratos. Esto evita dependencias circulares entre capas.
 
 ## Abrir en IntelliJ IDEA
 
 1. Abra IntelliJ IDEA.
 2. Seleccione **Open**.
-3. Elija la carpeta donte está el proyecto o directamente su `pom.xml`.
+3. Elija la carpeta donde está el proyecto o directamente su `pom.xml`.
 4. Seleccione un JDK 21 en **Project SDK**.
 5. Espere a que Maven termine de descargar e indexar las dependencias.
 6. Si IntelliJ lo solicita, habilite **annotation processing** para Lombok.
-7. Ejecute `AsisControlApplication`.
+7. Ejecute `AsisControlApplication`, ubicado en el módulo `controller`.
 
 No es necesario instalar MySQL para el primer arranque: el perfil predeterminado `local` usa una base H2 en memoria.
 
 ## Ejecución local
 
 ```powershell
-.\mvnw.cmd spring-boot:run
+.\mvnw.cmd -DskipTests install
+.\mvnw.cmd -f controller\pom.xml spring-boot:run
 ```
 
 Para disponer de una cuenta administrativa local, defina antes estas variables; no se incluye ninguna contraseña fija en el código:
@@ -52,7 +58,8 @@ $env:BOOTSTRAP_ADMIN_DOCUMENT = "00000000"
 $env:BOOTSTRAP_ADMIN_EMAIL = "admin@colegio.edu.pe"
 $env:BOOTSTRAP_ADMIN_PASSWORD = "una-clave-segura-de-prueba"
 $env:BOOTSTRAP_ADMIN_USERNAME = "admin"
-.\mvnw.cmd spring-boot:run
+.\mvnw.cmd -DskipTests install
+.\mvnw.cmd -f controller\pom.xml spring-boot:run
 ```
 
 Al ingresar por primera vez, la API obliga a cambiar la contraseña temporal antes de permitir el
@@ -124,7 +131,8 @@ La API nunca devuelve stack traces, nombres de excepciones internas ni mensajes 
 .\mvnw.cmd clean verify
 ```
 
-Este comando compila, ejecuta las pruebas y genera el reporte JaCoCo en `target/site/jacoco/index.html`.
+Este comando compila todos los módulos, ejecuta las pruebas y genera el reporte agregado de JaCoCo
+en `controller/target/site/jacoco-aggregate/index.html`.
 
 ## Seguridad
 
