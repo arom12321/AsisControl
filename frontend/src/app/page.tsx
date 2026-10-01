@@ -1,69 +1,30 @@
-import Image from "next/image";
+"use client";
+
+/* eslint-disable @next/next/no-img-element -- Figma SVG assets retain their authored dimensions. */
+
+import { FormEvent, useState } from "react";
+
+type Role = "Administrador" | "Docente" | "Estudiante" | "Apoderado";
+const roleDetails: Record<Role, { name: string; initials: string; title: string; nav: string[] }> = {
+  Administrador: { name: "Ana Ríos", initials: "AR", title: "Panel de administración", nav: ["Inicio", "Matrícula", "Asistencia", "Académico", "Horarios", "Finanzas", "Administración"] },
+  Docente: { name: "Patricia Morales", initials: "PM", title: "Bienvenida, Prof. Patricia Morales", nav: ["Inicio", "Mis cursos", "Asistencia", "Evaluaciones", "Tareas", "Horario"] },
+  Estudiante: { name: "Luis García", initials: "LG", title: "Bienvenido, Luis García", nav: ["Inicio", "Tareas", "Progreso", "Asistencia", "Horario"] },
+  Apoderado: { name: "María Rivas", initials: "MR", title: "Panel del Apoderado", nav: ["Inicio", "Matrícula", "Pagos", "Progreso", "Asistencia"] },
+};
+
+function Brand({ compact = false }: { compact?: boolean }) { return <div className="brand"><span className="brand-icon"><img src="/school-logo.svg" alt="" /></span><span><b>Colegio PUCP</b><small>{compact ? "Sistema de Gestión" : "Sistema de Gestión Académica"}</small></span></div>; }
+function roleFromUsername(username: string): Role { const value = username.trim().toLowerCase(); if (value.includes("admin")) return "Administrador"; if (value.includes("estudiante") || value.includes("alumno")) return "Estudiante"; if (value.includes("apoderado") || value.includes("padre")) return "Apoderado"; return "Docente"; }
 
 export default function Home() {
-  return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
+  const [role, setRole] = useState<Role>("Docente");
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [activeNav, setActiveNav] = useState("Inicio");
+  const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
+  const details = roleDetails[role];
+  function login(event: FormEvent<HTMLFormElement>) { event.preventDefault(); const form = new FormData(event.currentTarget); setRole(roleFromUsername(String(form.get("username") ?? ""))); setActiveNav("Inicio"); setLoggedIn(true); }
+
+  if (!loggedIn) return <main className="login-screen"><section className="login-identity"><div className="orb orb-one" /><div className="orb orb-two" /><div className="orb orb-three" /><Brand /><div className="identity-content"><h1>Plataforma<br />Académica<br />Integrada</h1><p>Accede a la información académica, administrativa y de comunicación del Colegio PUCP.</p><ul><li>Administrador</li><li>Docente</li><li>Estudiante</li><li>Apoderado</li></ul></div><small className="version">Año académico 2025 · Versión 2.1.0</small></section><section className="login-form-panel"><form className="login-form" onSubmit={login}><h2>Iniciar sesión</h2><p>Ingresa tus credenciales institucionales</p><label>Usuario <i>*</i><input name="username" required placeholder="Ej. admin, docente, estudiante, apoderado" /></label><label>Contraseña <i>*</i><span className="password-field"><input name="password" required type={showPassword ? "text" : "password"} placeholder="Ingresa tu contraseña" /><button type="button" aria-label="Mostrar contraseña" onClick={() => setShowPassword(!showPassword)}><img src="/eye.svg" alt="" /></button></span></label><a className="forgot" href="#recuperar">¿Olvidaste tu contraseña?</a><button className="login-button" type="submit">Iniciar sesión</button><div className="login-help">¿Problemas para acceder? Contacta a la administración del colegio.</div></form></section></main>;
+
+  return <main className="role-home"><header className="top-nav"><Brand compact /><nav>{details.nav.map((item) => <button className={activeNav === item ? "selected" : ""} key={item} onClick={() => setActiveNav(item)}>{item}</button>)}</nav><div className="account"><button className="bell" aria-label="Notificaciones">♧<b>3</b></button><button className="account-trigger" aria-expanded={isAccountMenuOpen} aria-label="Abrir menú de usuario" onClick={() => setIsAccountMenuOpen(!isAccountMenuOpen)}><span className="account-name"><strong>{details.name}</strong><small>{role}</small></span><span className={`avatar avatar-${role.toLowerCase()}`}>{details.initials}</span></button>{isAccountMenuOpen && <div className="account-menu"><div className="account-menu-info"><strong>{details.name}</strong><small>{role}</small></div><button className="logout-option" onClick={() => { setIsAccountMenuOpen(false); setLoggedIn(false); }}><img src="/sign-out.svg" alt="" />Cerrar sesión</button></div>}</div></header><section className="home-content"><div className="page-title"><div><h1>{activeNav === "Inicio" ? details.title : activeNav}</h1><p>Lunes, 8 de septiembre de 2025 · Año académico 2025</p></div></div><article className="role-message"><span className="message-mark">✓</span><div><p className="eyebrow">INICIO</p><h2>Has ingresado como {role.toLowerCase()}.</h2><p>Esta es la página de inicio para el perfil de {role.toLowerCase()}.</p></div></article></section></main>;
 }
