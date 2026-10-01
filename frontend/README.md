@@ -1,4 +1,16 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AsisControl Frontend
+
+Frontend de la primera iteración, desarrollado con Next.js y React.
+
+## Base temporal para backend
+
+La interfaz no consume el backend todavía. Los datos de demostración están aislados de las pantallas:
+
+- `src/features/auth/mock-auth-service.ts`: autenticación temporal y credenciales de prueba.
+- `src/features/users/mock-user-management-service.ts`: listado, registro, edición, cambio de estado y auditoría de usuarios.
+- Los archivos `types.ts` de cada funcionalidad contienen los contratos que debe conservar la futura implementación HTTP.
+
+Para conectar el backend, se reemplazan los servicios `mock` por implementaciones que cumplan sus interfaces (`AuthService` y `UserManagementService`). La UI, sus modelos y sus estados de carga no deberían requerir cambios.
 
 ## Getting Started
 
