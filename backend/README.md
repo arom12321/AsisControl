@@ -87,7 +87,18 @@ JWT_SECRET=... mínimo 32 caracteres ...
 CORS_ALLOWED_ORIGINS=http://localhost:3000
 ```
 
-El perfil `mysql` usa `ddl-auto=validate`: valida el esquema pero no crea ni altera tablas. **Los scripts MySQL todavía no forman parte de esta entrega**, por indicación del equipo; se generarán después tomando estas entidades como contrato.
+El perfil `mysql` usa Flyway para versionar el esquema y conserva `ddl-auto=validate` para que Hibernate compruebe que las entidades coinciden con las tablas sin modificarlas por su cuenta.
+
+La migración `V1__baseline_schema.sql` contiene el esquema completo. Si la base está vacía, Flyway crea las 43 tablas. Si la base ya contiene ese esquema pero todavía no tiene historial de Flyway, `baseline-on-migrate` registra la versión 1 sin intentar volver a crear las tablas.
+
+Para cada cambio posterior de estructura, agregue un archivo nuevo en `controller/src/main/resources/db/migration`, por ejemplo:
+
+```text
+V2__agregar_columna_telefono_emergencia.sql
+V3__crear_indice_busqueda_alumno.sql
+```
+
+No edite una migración que ya haya sido aplicada. Flyway valida sus checksums y ejecuta las pendientes en orden. Las credenciales reales deben permanecer únicamente en variables de entorno y nunca en Git.
 
 ## Módulos de la API
 
