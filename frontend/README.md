@@ -12,6 +12,17 @@ La interfaz no consume el backend todavía. Los datos de demostración están ai
 
 Para conectar el backend, se reemplazan los servicios `mock` por implementaciones que cumplan sus interfaces (`AuthService` y `UserManagementService`). La UI, sus modelos y sus estados de carga no deberían requerir cambios.
 
+## Rutas por rol
+
+Las rutas están agrupadas en `src/app/(auth)` y `src/app/(private)`; los grupos no alteran la URL:
+
+- `/login`: acceso al sistema.
+- `/admin`: panel de administrador.
+- `/admin/users`: administración de usuarios.
+- `/docente`, `/estudiante` y `/apoderado`: inicio de cada rol.
+
+`RoleGuard` centraliza la comprobación temporal de sesión y rol. Cuando exista el backend, esta protección deberá complementarse con la validación del token en el servidor.
+
 ## Getting Started
 
 First, run the development server:

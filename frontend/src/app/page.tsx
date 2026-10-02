@@ -3,6 +3,7 @@
 /* eslint-disable @next/next/no-img-element -- SVG assets are served from public/. */
 
 import { FormEvent, useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import { demoCredentials } from "@/features/auth/mock-auth-service";
 import { useAuth } from "@/features/auth/use-auth";
 import type { AuthenticatedUser, UserRole } from "@/features/auth/types";
@@ -12,6 +13,7 @@ import type {
   ManagedUser,
   UserInput,
 } from "@/features/users/types";
+import { roleHomePath } from "@/features/navigation/role-routes";
 
 type RolePresentation = { initials: string; title: string; nav: string[] };
 
@@ -81,6 +83,7 @@ function LoginScreen({
 }: {
   onLogin: ReturnType<typeof useAuth>["login"];
 }) {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -96,6 +99,7 @@ function LoginScreen({
     });
     setIsSubmitting(false);
     if (!result.ok) setError(result.message);
+    else router.push(roleHomePath[result.session.user.role]);
   }
 
   return (
@@ -472,14 +476,17 @@ function UserManagement() {
   );
 }
 
-function Dashboard({
+export function Dashboard({
   user,
   onLogout,
+  initialActiveNav = "Inicio",
 }: {
   user: AuthenticatedUser;
   onLogout: () => Promise<void>;
+  initialActiveNav?: string;
 }) {
-  const [activeNav, setActiveNav] = useState("Inicio");
+  const router = useRouter();
+  const [activeNav, setActiveNav] = useState(initialActiveNav);
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
   const details = roleDetails[user.role];
   const roleLabel = roleLabels[user.role];
@@ -493,7 +500,10 @@ function Dashboard({
             <button
               className={activeNav === item ? "selected" : ""}
               key={item}
-              onClick={() => setActiveNav(item)}
+              onClick={() => {
+                setActiveNav(item);
+                if (user.role === "ADMINISTRADOR" && item === "Administración") router.push("/admin/users");
+              }}
             >
               {item}
             </button>
