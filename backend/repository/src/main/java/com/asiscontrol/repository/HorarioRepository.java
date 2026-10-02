@@ -1,0 +1,41 @@
+package com.asiscontrol.repository;
+
+import com.asiscontrol.entity.Horario;
+import com.asiscontrol.entity.enums.DiaSemana;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+import java.time.LocalTime;
+import java.util.List;
+import java.util.Optional;
+
+public interface HorarioRepository extends JpaRepository<Horario, Long> {
+
+    Optional<Horario> findByIdAndActivoTrue(Long id);
+
+    Page<Horario> findByActivoTrue(Pageable pageable);
+
+    @Query("""
+            SELECT h FROM Horario h
+            WHERE h.activo = true
+              AND h.diaSemana = :diaSemana
+              AND h.horaInicio < :horaFin
+              AND h.horaFin > :horaInicio
+              AND (:horarioExcluidoId IS NULL OR h.id <> :horarioExcluidoId)
+              AND (h.aula.id = :aulaId
+                   OR h.asignacionCurso.docente.id = :docenteId
+                   OR h.asignacionCurso.seccion.id = :seccionId)
+            """)
+    List<Horario> buscarConflictos(
+            @Param("diaSemana") DiaSemana diaSemana,
+            @Param("horaInicio") LocalTime horaInicio,
+            @Param("horaFin") LocalTime horaFin,
+            @Param("aulaId") Long aulaId,
+            @Param("docenteId") Long docenteId,
+            @Param("seccionId") Long seccionId,
+            @Param("horarioExcluidoId") Long horarioExcluidoId
+    );
+}

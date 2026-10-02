@@ -838,3 +838,691 @@ input {
   justify-content: flex-end;
   margin-top: 24px;
 }
+
+/* GUI AsisControl: Inter, colores institucionales y retícula de 4 px. */
+@font-face {
+  font-family: Inter;
+  src: url("/fonts/inter-latin-wght-normal.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+body {
+  font-family: Inter, Arial, sans-serif;
+  font-size: 14px;
+}
+:root {
+  --blue-2: #1e3a8a;
+  --surface: #f8fafc;
+}
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+button {
+  cursor: pointer;
+}
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid #0284c7;
+  outline-offset: 3px;
+}
+.account-menu-info {
+  color: #0f172a;
+}
+.login-identity .version {
+  position: absolute;
+  bottom: 32px;
+  left: 48px;
+  margin: 0;
+}
+input::-ms-reveal,
+input::-ms-clear {
+  display: none;
+}
+.password-field button {
+  color: #64748b;
+}
+.forgot {
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+.home-content {
+  max-width: 1280px;
+  padding: 32px;
+}
+.top-nav {
+  padding: 0 32px;
+}
+.panel {
+  background: #fff;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px #0000000d;
+  padding: 24px;
+  margin-top: 20px;
+}
+.panel h3 {
+  font-size: 18px;
+  margin: 0 0 16px;
+}
+.panel h3:not(:first-child) {
+  margin-top: 24px;
+}
+.field {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #334155;
+  margin: 12px 0;
+}
+.field input,
+.field select {
+  display: block;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background: #fff;
+  color: #0f172a;
+  min-height: 40px;
+  padding: 8px 12px;
+  margin-top: 4px;
+  width: 100%;
+  font-weight: 400;
+}
+.field .password-field input {
+  padding-right: 44px;
+}
+.field .password-field button {
+  top: 2px;
+}
+.form-grid,
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 24px;
+}
+fieldset {
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+  border: 0;
+}
+.password-change {
+  max-width: 520px;
+  width: 100%;
+  margin: 24px;
+}
+.toolbar {
+  display: flex;
+  gap: 12px;
+  align-items: end;
+  margin: 20px 0;
+}
+.toolbar .field {
+  flex: 1;
+  margin: 0;
+}
+.toolbar input {
+  max-width: 480px;
+}
+.toolbar button,
+.pager button,
+.panel > button,
+.row-actions button,
+.management-heading > button:not(.primary-action),
+.form-actions button:not(.primary-action) {
+  background: #fff;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  color: #1e3a8a;
+  padding: 10px 14px;
+}
+.generate {
+  align-self: end;
+  min-height: 40px;
+  margin: 12px 0;
+  border: 1px solid #3b82f6;
+  border-radius: 6px;
+  color: #1e3a8a;
+  background: white;
+}
+.hint,
+.empty {
+  font-size: 13px;
+  color: #64748b;
+  line-height: 1.6;
+}
+.empty {
+  padding: 24px;
+  text-align: center;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #fff;
+}
+.pager {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  gap: 16px;
+  color: #64748b;
+  font-size: 12px;
+}
+.pager > div {
+  display: flex;
+  gap: 8px;
+}
+.choice-list {
+  display: grid;
+  gap: 8px;
+  max-height: 280px;
+  overflow: auto;
+  margin: 12px 0;
+}
+.choice-list > button {
+  text-align: left;
+  padding: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background: #fff;
+  color: #0f172a;
+}
+.choice-list button.selected {
+  background: #eff6ff;
+  border-color: #3b82f6;
+}
+.choice-list strong,
+.choice-list small {
+  display: block;
+}
+.choice-list small {
+  color: #64748b;
+  margin-top: 4px;
+}
+.check-choice {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 8px;
+}
+.check-choice input {
+  width: 18px;
+  height: 18px;
+}
+.detail-grid {
+  margin: 24px 0;
+}
+.detail-grid dt {
+  color: #64748b;
+  font-size: 12px;
+}
+.detail-grid dd {
+  margin: 4px 0 0;
+  color: #0f172a;
+  overflow-wrap: anywhere;
+}
+.user-table td {
+  overflow-wrap: anywhere;
+}
+.user-table button {
+  background: white;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  color: #1e3a8a;
+  padding: 8px 12px;
+}
+@media (max-width: 1000px) {
+  .top-nav {
+    flex-wrap: wrap;
+    height: auto;
+    min-height: 64px;
+    padding: 12px 20px;
+    gap: 12px;
+  }
+  .top-nav nav {
+    order: 3;
+    flex-basis: 100%;
+    justify-content: flex-start;
+  }
+  .account {
+    margin-left: auto;
+  }
+  .home-content {
+    padding: 24px 20px;
+  }
+}
+@media (max-width: 600px) {
+  .home-content {
+    padding: 20px 16px;
+  }
+  .form-grid,
+  .detail-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .panel {
+    padding: 16px;
+  }
+  .management-heading,
+  .toolbar,
+  .pager {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .management-heading h2 {
+    font-size: 22px;
+  }
+  .management-heading > button {
+    margin-top: 8px;
+  }
+  .user-table {
+    min-width: 0;
+  }
+  .user-table thead {
+    display: none;
+  }
+  .user-table tbody,
+  .user-table tr,
+  .user-table td {
+    display: block;
+  }
+  .user-table tr {
+    padding: 12px;
+    border-bottom: 1px solid #cbd5e1;
+  }
+  .user-table td {
+    border: 0;
+    padding: 6px 0;
+  }
+  .user-table td:before {
+    content: attr(data-label);
+    display: block;
+    font-size: 11px;
+    color: #64748b;
+    margin-bottom: 4px;
+  }
+  .audit-list article {
+    align-items: start;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .audit-list span,
+  .audit-list small {
+    text-align: left;
+  }
+  .row-actions {
+    flex-wrap: wrap;
+  }
+  .password-change {
+    margin: 16px;
+  }
+  .account-name {
+    display: block;
+  }
+  .login-form-panel {
+    padding: 24px;
+  }
+}
+
+/* Administración y matrícula: componentes del GUI de AsisControl. */
+.management-tabs {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.section-heading,
+.dialog-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 24px 0 16px;
+}
+.section-heading h3,
+.section-heading h4,
+.dialog-heading h3 {
+  margin: 0;
+}
+.section-heading p {
+  margin: 4px 0 0;
+  color: #64748b;
+}
+.year-list,
+.role-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+.year-card,
+.detail-card {
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  text-align: left;
+}
+.year-card {
+  display: grid;
+  gap: 8px;
+  color: #334155;
+}
+.year-card strong {
+  color: #1e3a8a;
+  font-size: 22px;
+}
+.year-card.selected {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px #dbeafe;
+}
+.configuration-detail {
+  margin-top: 24px;
+  padding: 24px;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+}
+.filter-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  align-items: end;
+  margin: 20px 0;
+}
+.filter-grid .row-actions {
+  grid-column: 1 / -1;
+}
+.full-field {
+  grid-column: 1 / -1;
+}
+.wide-dialog {
+  width: min(880px, calc(100vw - 32px));
+  max-height: calc(100dvh - 40px);
+  overflow-y: auto;
+}
+.dialog-heading {
+  margin-top: 0;
+}
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin: 20px 0;
+}
+.detail-grid dt {
+  font-size: 13px;
+  color: #64748b;
+  margin-bottom: 4px;
+}
+.detail-grid dd {
+  margin: 0;
+  color: #0f172a;
+  overflow-wrap: anywhere;
+}
+.detail-grid small,
+.history-list small,
+.permission-matrix small,
+.choice-list small {
+  display: block;
+  color: #64748b;
+  margin-top: 4px;
+  font-size: 12px;
+}
+.history-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+.history-list li {
+  padding: 16px;
+  border-left: 3px solid #3b82f6;
+  background: #f8fafc;
+  border-radius: 0 8px 8px 0;
+}
+.history-list p {
+  margin: 8px 0 0;
+  overflow-wrap: anywhere;
+}
+.action-card,
+.picker-card,
+.guardian-section {
+  margin: 20px 0;
+  padding: 20px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #f8fafc;
+}
+.action-card h4,
+.picker-card h4 {
+  margin-top: 0;
+}
+.choice-list {
+  list-style: none;
+  padding: 0;
+  max-height: 240px;
+  overflow-y: auto;
+}
+.choice-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+.selected-person {
+  padding: 12px;
+  border-radius: 6px;
+  background: #dbeafe;
+  color: #1e3a8a;
+}
+.permission-matrix caption {
+  text-align: left;
+  padding: 12px 0;
+  font-weight: 600;
+}
+.permission-matrix th[scope="row"] {
+  font-weight: 500;
+  text-align: left;
+  color: #334155;
+}
+.permission-yes {
+  color: #166534;
+  font-weight: 600;
+}
+.permission-no {
+  color: #64748b;
+}
+.technical-message {
+  padding: 16px;
+  background: #f8fafc;
+  border-radius: 6px;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 760px) {
+  .filter-grid,
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+  .section-heading {
+    flex-wrap: wrap;
+  }
+  .configuration-detail {
+    padding: 16px;
+  }
+  .wide-dialog {
+    max-height: calc(100dvh - 24px);
+  }
+}
+
+.recovery-screen {
+  min-height: 100vh;
+  display: grid;
+  place-content: center;
+  gap: 24px;
+  padding: 32px 20px;
+  background: var(--surface);
+}
+.recovery-brand {
+  text-align: center;
+  color: var(--blue);
+}
+.recovery-brand img {
+  height: 32px;
+  width: 32px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+.recovery-brand strong {
+  font-size: 24px;
+}
+.recovery-brand p {
+  margin-top: 8px;
+  font-size: 14px;
+}
+.recovery-card {
+  width: min(520px, 100%);
+  margin: 0 auto;
+}
+.recovery-card h1 {
+  font-size: 24px;
+  margin: 8px 0 20px;
+}
+.recovery-card fieldset {
+  display: grid;
+  gap: 16px;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+.recovery-card form {
+  margin-top: 16px;
+}
+.recovery-card .back-link {
+  display: block;
+  margin: 24px 0 16px;
+  text-align: center;
+  color: var(--blue);
+}
+a.forgot {
+  text-align: right;
+  font-size: 12px;
+  display: block;
+  margin: 8px 0 16px;
+  color: var(--blue);
+}
+.role-card {
+  padding: 20px;
+  text-align: left;
+  display: grid;
+  gap: 12px;
+  border: 1px solid var(--border, #dce1e8);
+  border-radius: 8px;
+  background: white;
+  color: #1f2937;
+  cursor: pointer;
+}
+.role-card strong {
+  font-size: 17px;
+}
+.role-card span {
+  font-size: 13px;
+  line-height: 1.5;
+}
+.role-card small {
+  color: #53617b;
+}
+.role-card.selected {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 2px #1e3a8a22;
+  background: #f1f4fc;
+}
+.role-card:focus-visible {
+  outline: 3px solid #8eacf6;
+  outline-offset: 3px;
+}
+.role-filters {
+  margin: 20px 0;
+}
+.permission-legend {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 20px 0;
+  font-size: 13px;
+}
+.permission-legend p {
+  flex-basis: 100%;
+  color: #53617b;
+}
+.permission-module {
+  display: block;
+  color: #1e3a8a;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+}
+.permission-matrix th strong {
+  display: block;
+}
+.permission-matrix details {
+  font-weight: 400;
+  font-size: 11px;
+  margin-top: 8px;
+  color: #53617b;
+}
+.permission-matrix summary {
+  cursor: pointer;
+}
+.permission-matrix td {
+  white-space: nowrap;
+}
+.permission-matrix caption {
+  text-align: left;
+  padding: 12px 0;
+  color: #53617b;
+}
+.notice {
+  background: #f0f4fc;
+  border: 1px solid #dce4f4;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 20px 0;
+  color: #283653;
+}
+.notice p {
+  margin: 8px 0 0;
+  line-height: 1.6;
+}
+@media (max-width: 640px) {
+  .recovery-screen {
+    padding: 20px 12px;
+  }
+  .recovery-card {
+    padding: 20px;
+  }
+  .permission-matrix td {
+    white-space: normal;
+  }
+  .role-card {
+    padding: 16px;
+  }
+}
+
+.recovery-brand img {
+  background: var(--blue);
+  padding: 6px;
+  border-radius: 8px;
+  box-sizing: content-box;
+}

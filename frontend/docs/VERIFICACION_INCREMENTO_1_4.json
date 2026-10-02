@@ -1,0 +1,1050 @@
+{
+  "version": "1.4",
+  "date": "2026-10-02",
+  "base_frontend_commit": "9086254e6b22dd73d47faa9c5f504afc8dd6de1a",
+  "base_backend_commit": "334042046221bb2df141ccf1d7510843719b0ba1",
+  "team_frontend_ref": "feature/frontend-inicial",
+  "team_frontend_commit": "5c7a6b955a33c2ce5a8ca054d6db50be98124332",
+  "team_backend_ref": "feature/backend-inicial",
+  "team_backend_commit": "c606cf6249bd1b4ea4298b8020a8dd23b5702f89",
+  "backend_tests": 54,
+  "frontend_tests": 12,
+  "lint": "passed",
+  "frontend_production_build": "passed",
+  "http_checks": 181,
+  "smtp_messages_received_by_test_server": 3,
+  "frontend_routes_and_font": 8,
+  "integration_database": "H2 in MySQL mode",
+  "mysql_migration_executed": false,
+  "external_mailbox_delivery_verified": false,
+  "interactive_browser_visual_check": false,
+  "git_push_performed": false,
+  "backend_test_reports": [
+    {
+      "name": "com.asiscontrol.service.SeguridadRecuperacionIntegrationTest",
+      "tests": "10",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "com.asiscontrol.security.AuthenticatedUserTest",
+      "tests": "2",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "com.asiscontrol.AsisControlApplicationTest",
+      "tests": "1",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "com.asiscontrol.service.PagoServiceTest",
+      "tests": "2",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "com.asiscontrol.repository.ScopedRepositoryIntegrationTest",
+      "tests": "1",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "com.asiscontrol.service.AccesosPorRolIntegrationTest",
+      "tests": "8",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "com.asiscontrol.util.HashUtilsTest",
+      "tests": "1",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "com.asiscontrol.service.MatriculaConcurrencyIntegrationTest",
+      "tests": "2",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "com.asiscontrol.service.ModuloAccessGuardIntegrationTest",
+      "tests": "4",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "com.asiscontrol.util.PageUtilsTest",
+      "tests": "1",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "com.asiscontrol.service.DashboardServiceIntegrationTest",
+      "tests": "1",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "com.asiscontrol.entity.enums.NivelLogroTest",
+      "tests": "1",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "com.asiscontrol.service.RiesgoServiceTest",
+      "tests": "1",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "com.asiscontrol.service.AdministracionMatriculaIntegrationTest",
+      "tests": "8",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "com.asiscontrol.security.PasswordChangeRequiredFilterTest",
+      "tests": "2",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "com.asiscontrol.service.CalificacionServiceTest",
+      "tests": "1",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "com.asiscontrol.entity.enums.OperadorComparacionTest",
+      "tests": "8",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0"
+    }
+  ],
+  "http_results": [
+    {
+      "method": "GET",
+      "path": "/api/usuarios",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/usuarios",
+      "status": 403
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/change-password",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/roles",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/alumnos",
+      "status": 201
+    },
+    {
+      "method": "POST",
+      "path": "/api/alumnos",
+      "status": 201
+    },
+    {
+      "method": "GET",
+      "path": "/api/alumnos?search=EST-SMOKE",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/alumnos/1",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/usuarios/personas?search=pass001",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/usuarios/provisionar",
+      "status": 201
+    },
+    {
+      "method": "POST",
+      "path": "/api/usuarios/provisionar",
+      "status": 409
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/alumnos/1",
+      "status": 403
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/change-password",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/alumnos/1",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/alumnos/2",
+      "status": 403
+    },
+    {
+      "method": "POST",
+      "path": "/api/usuarios/provisionar",
+      "status": 201
+    },
+    {
+      "method": "POST",
+      "path": "/api/usuarios/provisionar",
+      "status": 201
+    },
+    {
+      "method": "GET",
+      "path": "/api/alumnos/1",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/usuarios/personas?search=passbad",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/usuarios/provisionar",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/api/usuarios/personas?search=passbad",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/api/usuarios/3",
+      "status": 409
+    },
+    {
+      "method": "GET",
+      "path": "/api/auditoria/registros",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/logout",
+      "status": 204
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/api/configuracion-academica/anios",
+      "status": 201
+    },
+    {
+      "method": "POST",
+      "path": "/api/configuracion-academica/anios",
+      "status": 409
+    },
+    {
+      "method": "POST",
+      "path": "/api/configuracion-academica/anios/2026/periodos",
+      "status": 201
+    },
+    {
+      "method": "POST",
+      "path": "/api/configuracion-academica/anios/2026/periodos",
+      "status": 422
+    },
+    {
+      "method": "POST",
+      "path": "/api/configuracion-academica/anios/2026/periodos",
+      "status": 422
+    },
+    {
+      "method": "POST",
+      "path": "/api/configuracion-academica/anios/2026/grados",
+      "status": 201
+    },
+    {
+      "method": "POST",
+      "path": "/api/secciones",
+      "status": 201
+    },
+    {
+      "method": "POST",
+      "path": "/api/secciones",
+      "status": 409
+    },
+    {
+      "method": "POST",
+      "path": "/api/secciones",
+      "status": 400
+    },
+    {
+      "method": "POST",
+      "path": "/api/secciones",
+      "status": 400
+    },
+    {
+      "method": "PUT",
+      "path": "/api/configuracion-academica/anios/2026/estado",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/roles",
+      "status": 422
+    },
+    {
+      "method": "PUT",
+      "path": "/api/roles/4",
+      "status": 422
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/roles/4",
+      "status": 422
+    },
+    {
+      "method": "POST",
+      "path": "/api/solicitudes-matricula",
+      "status": 201
+    },
+    {
+      "method": "POST",
+      "path": "/api/solicitudes-matricula",
+      "status": 409
+    },
+    {
+      "method": "PUT",
+      "path": "/api/solicitudes-matricula/1",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/api/solicitudes-matricula/1",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/solicitudes-matricula",
+      "status": 201
+    },
+    {
+      "method": "POST",
+      "path": "/api/solicitudes-matricula",
+      "status": 409
+    },
+    {
+      "method": "PUT",
+      "path": "/api/solicitudes-matricula/2",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/api/solicitudes-matricula/2",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/configuracion-academica/anios/2026",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/api/solicitudes-matricula/1",
+      "status": 422
+    },
+    {
+      "method": "PUT",
+      "path": "/api/solicitudes-matricula/1",
+      "status": 409
+    },
+    {
+      "method": "POST",
+      "path": "/api/matriculas",
+      "status": 201
+    },
+    {
+      "method": "POST",
+      "path": "/api/matriculas",
+      "status": 422
+    },
+    {
+      "method": "GET",
+      "path": "/api/configuracion-academica/anios/2026",
+      "status": 200
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/matriculas/1",
+      "status": 422
+    },
+    {
+      "method": "PUT",
+      "path": "/api/matriculas/1",
+      "status": 400
+    },
+    {
+      "method": "PUT",
+      "path": "/api/matriculas/1",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/configuracion-academica/anios/2026",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/matriculas/1/historial",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/matriculas",
+      "status": 201
+    },
+    {
+      "method": "GET",
+      "path": "/api/solicitudes-matricula?size=20",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/matriculas?size=20",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/solicitudes-matricula/1/historial",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/api/secciones/1/estado",
+      "status": 409
+    },
+    {
+      "method": "GET",
+      "path": "/api/apoderados",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/alumnos/2/apoderados",
+      "status": 201
+    },
+    {
+      "method": "POST",
+      "path": "/api/alumnos/2/apoderados",
+      "status": 409
+    },
+    {
+      "method": "GET",
+      "path": "/api/alumnos/2",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/auditoria/errores?componente=ValidacionSolicitud&severidad=ADVERTENCIA&estado=PENDIENTE",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/auditoria/errores?correlacion=d4751ef6-9384-47d5-8035-856c4c2568d2",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/api/auditoria/errores/4",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/api/auditoria/errores/4",
+      "status": 409
+    },
+    {
+      "method": "PUT",
+      "path": "/api/auditoria/errores/4",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/auditoria/errores/4/seguimientos",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/auditoria/errores?desde=2026-10-02&hasta=2026-10-01",
+      "status": 422
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/change-password",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/configuracion-academica/anios",
+      "status": 403
+    },
+    {
+      "method": "GET",
+      "path": "/api/roles",
+      "status": 403
+    },
+    {
+      "method": "GET",
+      "path": "/api/auditoria/errores",
+      "status": 403
+    },
+    {
+      "method": "GET",
+      "path": "/api/auditoria/registros",
+      "status": 403
+    },
+    {
+      "method": "POST",
+      "path": "/api/matriculas",
+      "status": 403
+    },
+    {
+      "method": "GET",
+      "path": "/api/configuracion-academica/anios/2026",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/api/configuracion-academica/anios/2026/estado",
+      "status": 422
+    },
+    {
+      "method": "PUT",
+      "path": "/api/configuracion-academica/periodos/1/estado",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/api/configuracion-academica/periodos/1/estado",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/api/configuracion-academica/anios/2026/estado",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/configuracion-academica/anios/2026/grados",
+      "status": 422
+    },
+    {
+      "method": "PUT",
+      "path": "/api/matriculas/2",
+      "status": 422
+    },
+    {
+      "method": "GET",
+      "path": "/api/alumnos/1",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/configuracion-academica/anios",
+      "status": 201
+    },
+    {
+      "method": "POST",
+      "path": "/api/configuracion-academica/anios/2027/periodos",
+      "status": 201
+    },
+    {
+      "method": "POST",
+      "path": "/api/configuracion-academica/anios/2027/grados",
+      "status": 201
+    },
+    {
+      "method": "POST",
+      "path": "/api/configuracion-academica/anios/2027/grados",
+      "status": 201
+    },
+    {
+      "method": "POST",
+      "path": "/api/secciones",
+      "status": 201
+    },
+    {
+      "method": "PUT",
+      "path": "/api/configuracion-academica/anios/2027/estado",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/familia/oferta",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/solicitudes-matricula",
+      "status": 422
+    },
+    {
+      "method": "GET",
+      "path": "/api/familia/estudiantes",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/api/configuracion-academica/anios/2027/admision",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/familia/oferta",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/alumnos",
+      "status": 201
+    },
+    {
+      "method": "POST",
+      "path": "/api/solicitudes-matricula",
+      "status": 403
+    },
+    {
+      "method": "POST",
+      "path": "/api/solicitudes-matricula",
+      "status": 403
+    },
+    {
+      "method": "POST",
+      "path": "/api/solicitudes-matricula",
+      "status": 422
+    },
+    {
+      "method": "POST",
+      "path": "/api/solicitudes-matricula",
+      "status": 201
+    },
+    {
+      "method": "POST",
+      "path": "/api/solicitudes-matricula",
+      "status": 409
+    },
+    {
+      "method": "PUT",
+      "path": "/api/solicitudes-matricula/3",
+      "status": 403
+    },
+    {
+      "method": "PUT",
+      "path": "/api/solicitudes-matricula/3",
+      "status": 403
+    },
+    {
+      "method": "PUT",
+      "path": "/api/solicitudes-matricula/3",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/api/solicitudes-matricula/3",
+      "status": 422
+    },
+    {
+      "method": "PUT",
+      "path": "/api/solicitudes-matricula/3",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/matriculas",
+      "status": 422
+    },
+    {
+      "method": "PUT",
+      "path": "/api/solicitudes-matricula/3",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/api/configuracion-academica/anios/2027/admision",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/api/solicitudes-matricula/3",
+      "status": 422
+    },
+    {
+      "method": "PUT",
+      "path": "/api/solicitudes-matricula/3",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/api/configuracion-academica/anios/2027/admision",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/api/solicitudes-matricula/3",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/api/solicitudes-matricula/3",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/api/solicitudes-matricula/3",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/matriculas",
+      "status": 201
+    },
+    {
+      "method": "GET",
+      "path": "/api/solicitudes-matricula/3",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/solicitudes-matricula/3/historial",
+      "status": 403
+    },
+    {
+      "method": "PUT",
+      "path": "/api/solicitudes-matricula/3",
+      "status": 422
+    },
+    {
+      "method": "POST",
+      "path": "/api/solicitudes-matricula",
+      "status": 201
+    },
+    {
+      "method": "GET",
+      "path": "/api/solicitudes-matricula/4",
+      "status": 403
+    },
+    {
+      "method": "PUT",
+      "path": "/api/solicitudes-matricula/4",
+      "status": 403
+    },
+    {
+      "method": "GET",
+      "path": "/api/solicitudes-matricula",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/solicitudes-matricula",
+      "status": 201
+    },
+    {
+      "method": "PUT",
+      "path": "/api/solicitudes-matricula/5",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/solicitudes-matricula",
+      "status": 201
+    },
+    {
+      "method": "GET",
+      "path": "/api/roles",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/roles/permisos",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/api/usuarios/4",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/recovery/request",
+      "status": 202
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/recovery/request",
+      "status": 202
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/recovery/validate",
+      "status": 422
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/recovery/validate",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/recovery/reset",
+      "status": 422
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/recovery/reset",
+      "status": 422
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/recovery/reset",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/recovery/reset",
+      "status": 422
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/recovery/request",
+      "status": 202
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/recovery/request",
+      "status": 202
+    },
+    {
+      "method": "PUT",
+      "path": "/api/usuarios/4/contrasena-temporal",
+      "status": 400
+    },
+    {
+      "method": "PUT",
+      "path": "/api/usuarios/4/contrasena-temporal",
+      "status": 204
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/recovery/validate",
+      "status": 422
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/familia/estudiantes",
+      "status": 403
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/change-password",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/api/usuarios/1",
+      "status": 409
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/api/usuarios/4",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/api/usuarios/4",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/api/usuarios/4",
+      "status": 422
+    },
+    {
+      "method": "PUT",
+      "path": "/api/usuarios/4",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/usuarios/4",
+      "status": 200
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/usuarios/4",
+      "status": 422
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 401
+    },
+    {
+      "method": "PUT",
+      "path": "/api/usuarios/4",
+      "status": 422
+    },
+    {
+      "method": "PUT",
+      "path": "/api/usuarios/4",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/auditoria/registros?size=100",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/auditoria/errores?size=100",
+      "status": 200
+    }
+  ]
+}

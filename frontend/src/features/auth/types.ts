@@ -5,10 +5,13 @@ export type AuthenticatedUser = {
   username: string;
   fullName: string;
   role: UserRole;
+  permissions?: string[];
+  requiresPasswordChange?: boolean;
 };
 
 export type AuthSession = {
   accessToken: string;
+  expiresAt?: string;
   user: AuthenticatedUser;
 };
 

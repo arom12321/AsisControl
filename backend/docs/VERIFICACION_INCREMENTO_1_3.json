@@ -1,0 +1,17 @@
+{
+  "version": "1.3",
+  "date": "2026-10-01",
+  "backendTests": 44,
+  "frontendContractTests": 10,
+  "httpChecks": 95,
+  "frontendRoutesAndFont": 7,
+  "backendFailures": 0,
+  "frontendFailures": 0,
+  "lint": "passed",
+  "productionBuild": "passed",
+  "concurrentLastVacancy": "maximum one enrollment",
+  "rollbackAudit": "passed",
+  "databaseTested": "H2 in MySQL mode",
+  "mysqlMigrationExecuted": false,
+  "browserVisualVerified": false
+}
