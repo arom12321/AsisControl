@@ -32,64 +32,118 @@ Las dependencias siguen una sola dirección: `controller` consume `service`; `se
 `repository`, `dto` y `entity`; `repository` consume `entity`; y `dto` consume los tipos del modelo
 que necesita para sus contratos. Esto evita dependencias circulares entre capas.
 
-## Abrir en IntelliJ IDEA
+## Requisitos y apertura del proyecto
 
-1. Abra IntelliJ IDEA.
-2. Seleccione **Open**.
-3. Elija la carpeta donde está el proyecto o directamente su `pom.xml`.
-4. Seleccione un JDK 21 en **Project SDK**.
-5. Espere a que Maven termine de descargar e indexar las dependencias.
-6. Si IntelliJ lo solicita, habilite **annotation processing** para Lombok.
-7. Ejecute `AsisControlApplication`, ubicado en el módulo `controller`.
-
-No es necesario instalar MySQL para el primer arranque: el perfil predeterminado `local` usa una base H2 en memoria.
-
-## Ejecución local
+Antes de ejecutar, verifica que Java 21 esté activo:
 
 ```powershell
-.\mvnw.cmd -DskipTests install
-.\mvnw.cmd -f controller\pom.xml spring-boot:run
+java -version
 ```
 
-Para disponer de una cuenta administrativa local, defina antes estas variables; no se incluye ninguna contraseña fija en el código:
+Debe mostrar la versión 21. Maven no necesita instalarse globalmente: se usa el wrapper incluido
+(`mvnw.cmd`). Para IntelliJ IDEA, abre el `pom.xml` de `backend`, selecciona JDK 21 como
+**Project SDK** y habilita *annotation processing* si el IDE lo solicita para Lombok.
+
+Los comandos siguientes se ejecutan desde la carpeta `backend`:
 
 ```powershell
+cd C:\ruta\al\repositorio\AsisControl\backend
+```
+
+> `.env.example` es una plantilla; Spring Boot no la carga automáticamente. Define las variables en
+> la terminal actual o en la configuración de ejecución del IDE. Nunca guardes contraseñas, JWT ni
+> secretos reales en Git.
+
+## Inicio rápido recomendado: perfil local (H2)
+
+Para el primer arranque no se requiere MySQL. El perfil `local` es el predeterminado, crea una base
+H2 temporal en memoria y se reinicia al detener la aplicación.
+
+```powershell
+$env:SPRING_PROFILES_ACTIVE = "local"
+$env:BOOTSTRAP_ENABLED = "true"
 $env:BOOTSTRAP_ADMIN_DOCUMENT = "00000000"
-$env:BOOTSTRAP_ADMIN_EMAIL = "admin@colegio.edu.pe"
-$env:BOOTSTRAP_ADMIN_PASSWORD = "una-clave-segura-de-prueba"
+$env:BOOTSTRAP_ADMIN_EMAIL = "admin@colegio.test"
 $env:BOOTSTRAP_ADMIN_USERNAME = "admin"
+$env:BOOTSTRAP_ADMIN_PASSWORD = "Temporal2026Clave"
+
 .\mvnw.cmd -DskipTests install
 .\mvnw.cmd -f controller\pom.xml spring-boot:run
 ```
 
-Al ingresar por primera vez, la API obliga a cambiar la contraseña temporal antes de permitir el
-acceso al resto de módulos. Solo quedan disponibles `/api/auth/me`, `/api/auth/change-password` y
-`/api/auth/logout` hasta completar el cambio.
+La contraseña temporal debe tener entre 8 y 64 caracteres, mayúscula, minúscula y número; no puede
+tener espacios ni contener el nombre de usuario. Al iniciar sesión, el usuario debe cambiarla antes
+de acceder al resto de módulos.
 
-Direcciones útiles:
+Cuando el log muestre que Tomcat inició en el puerto `8080`, verifica:
 
-- API: `http://localhost:8080/api`
-- Swagger UI: `http://localhost:8080/swagger-ui.html`
-- OpenAPI JSON: `http://localhost:8080/v3/api-docs`
 - Salud: `http://localhost:8080/actuator/health`
+- Swagger UI: `http://localhost:8080/swagger-ui.html`
+- API: `http://localhost:8080/api`
 - Consola H2 local: `http://localhost:8080/h2-console`
+
+Detén el servidor con `Ctrl+C`. Al volver a iniciarlo en perfil `local`, se perderán los datos de
+H2; esto es normal.
 
 ## Ejecución con MySQL
 
-Copie los nombres de variables de `.env.example` a la configuración de ejecución de IntelliJ o al entorno del sistema. Las variables mínimas son:
+Usa MySQL cuando necesites conservar los datos entre reinicios. Para pruebas, crea una base nueva;
+no ejecutes manualmente `V1__baseline_schema.sql` ni crees tablas a mano:
 
-```text
-SPRING_PROFILES_ACTIVE=mysql
-DB_URL=jdbc:mysql://localhost:3306/asiscontrol?useSSL=false&serverTimezone=America/Lima&allowPublicKeyRetrieval=true
-DB_USERNAME=asiscontrol_app
-DB_PASSWORD=...
-JWT_SECRET=... mínimo 32 caracteres ...
-CORS_ALLOWED_ORIGINS=http://localhost:3000
+```sql
+CREATE DATABASE asiscontrol_pruebas
+    CHARACTER SET utf8mb4
+    COLLATE utf8mb4_unicode_ci;
 ```
 
-El perfil `mysql` usa Flyway para versionar el esquema y conserva `ddl-auto=validate` para que Hibernate compruebe que las entidades coinciden con las tablas sin modificarlas por su cuenta.
+En PowerShell, configura el perfil y las credenciales. El comando solicita la clave de MySQL sin
+mostrarla en pantalla:
 
-La migración `V1__baseline_schema.sql` contiene el esquema completo. Si la base está vacía, Flyway crea las 43 tablas. Si la base ya contiene ese esquema pero todavía no tiene historial de Flyway, `baseline-on-migrate` registra la versión 1 sin intentar volver a crear las tablas.
+```powershell
+$env:SPRING_PROFILES_ACTIVE = "mysql"
+$env:DB_URL = "jdbc:mysql://localhost:3306/asiscontrol_pruebas?useSSL=false&serverTimezone=America/Lima&allowPublicKeyRetrieval=true"
+$env:DB_USERNAME = "root"
+$mysqlPassword = Read-Host "Contraseña de MySQL" -AsSecureString
+$env:DB_PASSWORD = [System.Net.NetworkCredential]::new("", $mysqlPassword).Password
+
+$jwtBytes = New-Object byte[] 48
+$rng = New-Object System.Security.Cryptography.RNGCryptoServiceProvider
+$rng.GetBytes($jwtBytes)
+$rng.Dispose()
+$env:JWT_SECRET = [Convert]::ToBase64String($jwtBytes)
+
+$env:BOOTSTRAP_ENABLED = "true"
+$env:BOOTSTRAP_ADMIN_DOCUMENT = "00000000"
+$env:BOOTSTRAP_ADMIN_EMAIL = "admin@colegio.test"
+$env:BOOTSTRAP_ADMIN_USERNAME = "admin"
+$env:BOOTSTRAP_ADMIN_PASSWORD = "Temporal2026Clave"
+
+.\mvnw.cmd -DskipTests install
+.\mvnw.cmd -f controller\pom.xml spring-boot:run
+```
+
+`JWT_SECRET` es obligatorio en MySQL. Generarlo nuevamente invalida los tokens emitidos antes, lo
+cual es apropiado para pruebas. Si cierras PowerShell, vuelve a definir todas las variables antes
+del siguiente arranque.
+
+El perfil `mysql` usa Flyway para versionar el esquema y `ddl-auto=validate` para que Hibernate solo
+compruebe la compatibilidad. En una base vacía, Flyway aplica
+`V1__baseline_schema.sql`, que es la versión oficial actual del esquema. No modifiques una migración
+ya aplicada: Flyway valida su checksum.
+
+Los archivos recibidos externamente, incluidos SQL que no estén dentro de
+`controller/src/main/resources/db/migration`, no se ejecutan automáticamente y no deben mezclarse
+con la ruta oficial sin revisión del equipo responsable de datos.
+
+## Problemas frecuentes
+
+| Mensaje o síntoma | Causa habitual | Qué hacer |
+| --- | --- | --- |
+| `JWT_SECRET es obligatorio para este perfil` | Falta la variable en el perfil `mysql`. | Ejecuta el bloque que genera y asigna `JWT_SECRET` en la misma terminal. |
+| `RandomNumberGenerator does not contain a method named Fill` | PowerShell/.NET antiguo. | Usa el bloque con `RNGCryptoServiceProvider` incluido arriba. |
+| `Unknown database` | La base indicada en `DB_URL` no existe. | Crea solo la base con `CREATE DATABASE`; Flyway crea las tablas. |
+| `Access denied for user` | Usuario, contraseña o permisos de MySQL incorrectos. | Revisa `DB_USERNAME`, vuelve a ingresar la contraseña y valida el acceso en MySQL. |
+| `Schema validation` o error de Flyway | Se mezclaron scripts manuales, faltan migraciones o la base tiene un esquema previo distinto. | Usa una base de pruebas vacía; para una base con datos, respáldala y no la modifiques sin revisar su historial. |
 
 Para cada cambio posterior de estructura, agregue un archivo nuevo en `controller/src/main/resources/db/migration`, por ejemplo:
 
@@ -98,7 +152,7 @@ V2__agregar_columna_telefono_emergencia.sql
 V3__crear_indice_busqueda_alumno.sql
 ```
 
-No edite una migración que ya haya sido aplicada. Flyway valida sus checksums y ejecuta las pendientes en orden. Las credenciales reales deben permanecer únicamente en variables de entorno y nunca en Git.
+No edite una migración que ya haya sido aplicada. Flyway valida sus checksums y ejecuta las pendientes en orden.
 
 ## Módulos de la API
 
