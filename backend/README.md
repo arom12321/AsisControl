@@ -54,7 +54,19 @@ cd C:\ruta\al\repositorio\AsisControl\backend
 > la terminal actual o en la configuración de ejecución del IDE. Nunca guardes contraseñas, JWT ni
 > secretos reales en Git.
 
-## Inicio rápido recomendado: perfil local (H2)
+## Elegir el perfil de ejecución
+
+Antes de levantar el backend, elige **solo uno** de estos perfiles en PowerShell:
+
+- `local`: usa H2 en memoria. Es la opción recomendada para desarrollar o hacer pruebas rápidas;
+  no requiere MySQL y los datos se eliminan al detener el servidor.
+- `mysql`: usa una base MySQL y conserva los datos. Requiere definir conexión, contraseña y
+  `JWT_SECRET`.
+
+No copies los bloques de ambos perfiles en la misma terminal. Si cambias de perfil, detén el backend
+con `Ctrl+C` y ejecuta el bloque completo del nuevo perfil.
+
+## Opción A: ejecutar con `SPRING_PROFILES_ACTIVE=local` (H2)
 
 Para el primer arranque no se requiere MySQL. El perfil `local` es el predeterminado, crea una base
 H2 temporal en memoria y se reinicia al detener la aplicación.
@@ -85,7 +97,7 @@ Cuando el log muestre que Tomcat inició en el puerto `8080`, verifica:
 Detén el servidor con `Ctrl+C`. Al volver a iniciarlo en perfil `local`, se perderán los datos de
 H2; esto es normal.
 
-## Ejecución con MySQL
+## Opción B: ejecutar con `SPRING_PROFILES_ACTIVE=mysql` (MySQL)
 
 Usa MySQL cuando necesites conservar los datos entre reinicios. Para pruebas, crea una base nueva;
 no ejecutes manualmente `V1__baseline_schema.sql` ni crees tablas a mano:
